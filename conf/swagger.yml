@@ -1,0 +1,11 @@
+---
+openapi: "3.0.3"
+info:
+  title: "Play Swagger"
+  description: "RA 132/202"
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
