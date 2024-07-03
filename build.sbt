@@ -12,6 +12,8 @@ libraryDependencies ++= Seq(
   "com.github.t3hnar" %% "scala-bcrypt" % "4.3.0",
   // Swagger
   "org.webjars" % "swagger-ui" % "4.15.0",
+
+
 )
 
 // Swagger

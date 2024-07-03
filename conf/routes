@@ -6,6 +6,7 @@
 ### NoDocs ###
 GET     /                           controllers.HomeController.index()
 
+
 ###
 #   responses:
 #     200:
@@ -73,6 +74,23 @@ DELETE  /api/v1/messages/:id        controllers.MessageController.delete(id: Lon
 #     - basicAuth: []
 ###
 PUT     /api/v1/messages/:id        controllers.MessageController.update(id: Long)
+
+
+###
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#           $ref: "#/definitions/dtos.NewLogin"
+#   responses:
+#     200:
+#       schema:
+#         $ref: '#/definitions/dtos.NewLogin'
+#     401:
+#       description: Authentication information is missing or invalid
+###
+POST     /api/v1/login       controllers.AuthController.login()
 
 # Map static resources from the /public folder to the /assets URL path
 ### NoDocs ###

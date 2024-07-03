@@ -5,6 +5,11 @@ import scala.util.Try
 import scala.util.matching.Regex
 
 object BasicAuth {
+  def createBasicAuthString(username: String, password: String): String = {
+    val credentials = s"$username:$password"
+    val base64Credentials = Base64.getEncoder.encodeToString(credentials.getBytes("UTF-8"))
+    base64Credentials
+  }
 
   private val basicAuthPattern: Regex = "Basic (.*)".r
   private val credentialsPattern: Regex = "(.*):(.*)".r

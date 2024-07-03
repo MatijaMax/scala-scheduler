@@ -46,7 +46,11 @@ class MessageRepository @Inject() (override protected val dbConfigProvider: Data
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
     def content = column[String]("content")
 
-    override def * = (id, content) <> ((Message.apply _).tupled, Message.unapply)
+    def receiver = column[String]("receiver")
+
+    def read = column[Boolean]("read")
+
+    override def * = (id, content, receiver, read) <> ((Message.apply _).tupled, Message.unapply)
   }
 
 }
