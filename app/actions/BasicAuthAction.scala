@@ -13,16 +13,23 @@ class BasicAuthAction @Inject()(
 )(implicit ec: ExecutionContext)
   extends ActionBuilderImpl(parser) {
 
-  override def invokeBlock[A](request: Request[A], block: Request[A] => Future[Result]): Future[Result] =
+  override def invokeBlock[A](request: Request[A], block: Request[A] => Future[Result]): Future[Result] = {
+    // Extract Authorization header
     request.headers.get("Authorization") match {
       case Some(auth) =>
-        authService
-          .basicAuth(auth)
-          .flatMap {
+        // Ensure it starts with "Basic "
+        if (auth.startsWith("Basic ")) {
+          // Pass the base64 part to authService
+          val base64Credentials = auth.stripPrefix("Basic ")
+          authService.basicAuth(base64Credentials).flatMap {
             case true => block(request)
-            case false => Future.successful(Unauthorized)
+            case false => Future.successful(Results.Unauthorized("Invalid credentials"))
           }
-      case _ =>
-        Future.successful(Unauthorized)
+        } else {
+          Future.successful(Results.Unauthorized("Invalid authorization header format"))
+        }
+      case None =>
+        Future.successful(Results.Unauthorized("No authorization header found"))
     }
+  }
 }

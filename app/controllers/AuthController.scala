@@ -17,12 +17,16 @@ class AuthController @Inject()(val controllerComponents: ControllerComponents, m
   extends BaseController {
 
 
-  def create: Action[NewMessage] = basicAuthAction.async(parse.json[NewMessage]) { request =>
-    val messageToAdd: Message = request.body
-
-    messageService.create(messageToAdd).map {
-      case Some(message) => Created(Json.toJson(message))
-      case None          => Conflict
+  def register: Action[NewLogin] = Action.async(parse.json[NewLogin]) { request =>
+    val userToAdd: NewLogin = request.body
+    authService.isUserUnique(userToAdd.username).flatMap {
+      case false =>
+        authService.register(userToAdd).map {
+          case Some(message) => Created(Json.toJson(message))
+          case None => InternalServerError
+        }
+      case true =>
+        Future.successful(Conflict("Username already exists"))
     }
   }
 

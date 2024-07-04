@@ -18,6 +18,19 @@ class MessageController @Inject() (val controllerComponents: ControllerComponent
     messageService.getAll.map(messages => Ok(Json.toJson(messages)))
   }
 
+  def getAllUnread(username: String): Action[AnyContent] = Action.async { implicit request =>
+    messageService.getAll.map { messages =>
+      val filteredMessages = messages.filter(msg =>
+        msg.receiver == username && !msg.read
+      )
+      Ok(Json.toJson(filteredMessages))
+    }.recover {
+          // !!! IMPORTANT
+      case ex: Exception =>
+        InternalServerError("Failed to retrieve unread messages: " + ex.getMessage)
+    }
+  }
+
   def getById(id: Long): Action[AnyContent] = Action.async {
     messageService.getById(id).map {
       case Some(message) => Ok(Json.toJson(message))

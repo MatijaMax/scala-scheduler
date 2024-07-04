@@ -20,6 +20,14 @@ GET     /api/v1/messages            controllers.MessageController.getAll
 #     200:
 #       schema:
 #         $ref: '#/definitions/models.Message'
+###
+GET     /api/v1/messages/exclusive/:username            controllers.MessageController.getAllUnread(username)
+
+###
+#   responses:
+#     200:
+#       schema:
+#         $ref: '#/definitions/models.Message'
 #     404:
 #       description: Message with specified ID was not found
 ###
@@ -91,6 +99,22 @@ PUT     /api/v1/messages/:id        controllers.MessageController.update(id: Lon
 #       description: Authentication information is missing or invalid
 ###
 POST     /api/v1/login       controllers.AuthController.login()
+
+###
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#           $ref: "#/definitions/dtos.NewLogin"
+#   responses:
+#     200:
+#       schema:
+#         $ref: '#/definitions/models.User'
+#     401:
+#       description: Authentication information is missing or invalid
+###
+POST    /api/v1/register           controllers.AuthController.register
 
 # Map static resources from the /public folder to the /assets URL path
 ### NoDocs ###

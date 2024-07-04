@@ -21,6 +21,11 @@ INSERT INTO public.users (username, password) VALUES ('Mihailo', '$2a$10$tdBXWNy
 INSERT INTO public.users (username, password) VALUES ('Tamara', '$2a$10$tdBXWNyNDnp0HbnjWtK3g./HquMyK8WUH9sWr937J9AAwW1kIrs3G');
 INSERT INTO public.users (username, password) VALUES ('Anastasia', '$2a$10$tdBXWNyNDnp0HbnjWtK3g./HquMyK8WUH9sWr937J9AAwW1kIrs3G');
 
+INSERT INTO public.messages(content, receiver, read) VALUES ('XY was cancelled!', 'Anastasia', false);
+INSERT INTO public.messages(content, receiver, read) VALUES ('XY meeting date changed to 21.02.2025. :) !', 'Anastasia', false);
+INSERT INTO public.messages(content, receiver, read) VALUES ('Attendee Anastasia quit XY!', 'Milenko', false);
+INSERT INTO public.messages(content, receiver, read) VALUES ('You have been invited to ZY by Anastasia', 'Milenko', false);
+
 -- !Downs
 DROP TABLE users;
 DROP TABLE messages;
