@@ -14,12 +14,12 @@ class BasicAuthAction @Inject()(
   extends ActionBuilderImpl(parser) {
 
   override def invokeBlock[A](request: Request[A], block: Request[A] => Future[Result]): Future[Result] = {
-    // Extract Authorization header
+    //Auth header
     request.headers.get("Authorization") match {
       case Some(auth) =>
-        // Ensure it starts with "Basic "
+        //"Basic" check
         if (auth.startsWith("Basic ")) {
-          // Pass the base64 part to authService
+          //base64
           val base64Credentials = auth.stripPrefix("Basic ")
           authService.basicAuth(base64Credentials).flatMap {
             case true => block(request)

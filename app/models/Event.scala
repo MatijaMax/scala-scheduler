@@ -6,11 +6,10 @@ import java.time.LocalDateTime
 
 case class Event(id: Long,
                  name: String,
-                 service: String,
-                 creator: User,
-                 listOfParticipants: List[User],
+                 description: String,
+                 creator: String,
                  startDateTime: LocalDateTime,
-                 endDateTime: LocalDateTime)
+                 duration: Int)
 object Event {
-  implicit val jsonFormat: OFormat[User] = Json.format[User]
+  implicit val jsonFormat: OFormat[Event] = Json.format[Event]
 }

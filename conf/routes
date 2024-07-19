@@ -83,6 +83,71 @@ DELETE  /api/v1/messages/:id        controllers.MessageController.delete(id: Lon
 ###
 PUT     /api/v1/messages/:id        controllers.MessageController.update(id: Long)
 
+###
+#   responses:
+#     200:
+#       schema:
+#         $ref: '#/definitions/models.Event'
+###
+GET     /api/v2/events            controllers.EventController.getAll
+
+###
+#   responses:
+#     200:
+#       schema:
+#         $ref: '#/definitions/models.Event'
+#     404:
+#       description: Event with specified ID was not found
+###
+GET     /api/v2/events/:id        controllers.EventController.getById(id: Long)
+
+###
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#           $ref: "#/definitions/dtos.NewEvent"
+#   responses:
+#     200:
+#       schema:
+#         $ref: '#/definitions/models.Event'
+#     401:
+#       description: Authentication information is missing or invalid
+###
+POST    /api/v2/events           controllers.EventController.create
+
+
+###
+#   responses:
+#     204:
+#       description: Event with specified id has been deleted
+#     401:
+#       description: Authentication information is missing or invalid
+#     404:
+#       description: Event with specified ID was not found
+#   security:
+#     - basicAuth: []
+###
+DELETE  /api/v2/events/:id        controllers.EventController.delete(id: Long)
+
+###
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#           $ref: "#/definitions/models.Event"
+#   responses:
+#     200:
+#       schema:
+#         $ref: '#/definitions/models.Event'
+#     401:
+#       description: Authentication information is missing or invalid
+#   security:
+#     - basicAuth: []
+###
+PUT     /api/v2/events/:id        controllers.EventController.update(id: Long)
 
 ###
 #   requestBody:
