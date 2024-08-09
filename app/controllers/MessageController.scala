@@ -31,6 +31,8 @@ class MessageController @Inject() (val controllerComponents: ControllerComponent
     }
   }
 
+
+
   def getById(id: Long): Action[AnyContent] = Action.async {
     messageService.getById(id).map {
       case Some(message) => Ok(Json.toJson(message))

@@ -4,6 +4,7 @@ import models.Message
 import org.postgresql.util.PSQLException
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
+import zio.{Task, ZIO, ZLayer}
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
@@ -25,6 +26,16 @@ class MessageRepository @Inject() (override protected val dbConfigProvider: Data
       .recover { case e: PSQLException =>
         None
       }
+  
+  def insertZIO(message: Message): Task[Option[Message]] = {
+    ZIO.fromFuture { implicit ec =>
+      db.run((messages returning messages) += message)
+        .map(Some(_))
+        .recover { case e: PSQLException =>
+          None
+        }
+    }
+  }
 
   def delete(id: Long): Future[Option[Int]] = {
     db.run(messages.filter(_.id === id).delete).map {

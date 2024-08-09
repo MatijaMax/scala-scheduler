@@ -25,7 +25,7 @@ class EventUserController @Inject() (val controllerComponents: ControllerCompone
     }
   }
 
-  def create: Action[NewEventUser] = basicAuthAction.async(parse.json[NewEventUser]) { request =>
+  def create: Action[NewEventUser] = Action.async(parse.json[NewEventUser]) { request =>
     val eventUserToAdd: EventUser = request.body
 
     eventUserService.create(eventUserToAdd).map {
