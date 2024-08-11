@@ -16,7 +16,6 @@ import scala.concurrent.{ExecutionContext, Future}
 class AuthController @Inject()(val controllerComponents: ControllerComponents, messageService: MessageService, authService: AuthService, basicAuthAction: BasicAuthAction)(implicit ec: ExecutionContext)
   extends BaseController {
 
-
   def register: Action[NewLogin] = Action.async(parse.json[NewLogin]) { request =>
     val userToAdd: NewLogin = request.body
     authService.isUserUnique(userToAdd.username).flatMap {
@@ -43,6 +42,5 @@ class AuthController @Inject()(val controllerComponents: ControllerComponents, m
       case false => Unauthorized("Invalid username or password")
     }
   }
-
 }
 

@@ -21,10 +21,10 @@ class MessageService @Inject() (messageRepository: MessageRepository) {
 
   def createZIO(message: Message): Task[Option[Message]] = messageRepository.insertZIO(message)
 
-  def createCancellationMessagesZIO(eventName: String, userEvents: List[EventUser]): ZIO[Any, Throwable, List[Option[Message]]] = {
+  def createCancellationMessagesZIO(eventName: String, creatorName: String, userEvents: List[EventUser]): ZIO[Any, Throwable, List[Option[Message]]] = {
     for {
       messages <- ZIO.foreach(userEvents) { userEvent =>
-        val message = Message(0, "Event " + eventName + " was cancelled!", userEvent.username, false)
+        val message = Message(0, creatorName+": Event " + eventName + " was cancelled", userEvent.username, false)
         createZIO(message)
       }
     } yield messages

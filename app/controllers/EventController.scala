@@ -2,7 +2,7 @@ package controllers
 
 import actions.BasicAuthAction
 import dtos.NewEvent
-import libs.http.ActionBuilderOps
+import helpers.ZioAdapter.ActionBuilderOps
 import models.Event
 import play.api.libs.json.Json
 import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents}
@@ -58,12 +58,14 @@ class EventController @Inject() (val controllerComponents: ControllerComponents,
       }
   }
 
-
   def deleteZIO(id: Long): Action[AnyContent] = Action.zio { _ =>
     val result: ZIO[Any, Throwable, Unit] = zioService.deleteEventChained(id)
-
     result.fold(
-      ex => InternalServerError(ex.getMessage),
+      {
+        case ex: RuntimeException if ex.getMessage.contains("Not found") => NotFound(ex.getMessage)
+        case ex: RuntimeException if ex.getMessage.contains("Not found chained") => NoContent
+        case ex => InternalServerError(ex.getMessage)
+      },
       _ => NoContent
     )
   }

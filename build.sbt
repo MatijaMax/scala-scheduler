@@ -4,7 +4,7 @@ scalaVersion := "2.12.9"
 
 libraryDependencies ++= Seq(
   guice,
-  // Database
+  // Slick
   "com.typesafe.play" %% "play-slick" % "5.1.0",
   "com.typesafe.play" %% "play-slick-evolutions" % "5.1.0",
   "org.postgresql" % "postgresql" % "42.5.0",
@@ -17,9 +17,10 @@ libraryDependencies ++= Seq(
   "dev.zio" %% "zio-interop-cats" % "3.3.0",
   "com.softwaremill.macwire" %% "macros" % "2.3.1" % Provided,
   compilerPlugin("com.github.ghik" % "silencer-plugin" % "1.4.3" cross CrossVersion.full),
-  "com.github.ghik" % "silencer-lib" % "1.4.3" % Provided cross CrossVersion.full
-
-
+  "com.github.ghik" % "silencer-lib" % "1.4.3" % Provided cross CrossVersion.full,
+  //FS2
+  "co.fs2" %% "fs2-core" % "3.2.7",
+  "co.fs2" %% "fs2-io" % "3.2.7"
 )
 
 // Swagger

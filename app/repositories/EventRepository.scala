@@ -55,6 +55,37 @@ class EventRepository @Inject() (override protected val dbConfigProvider: Databa
     }
   }
 
+  def getAllZIO: ZIO[Any, Throwable, Seq[Event]] = {
+    ZIO.fromFuture { implicit ec =>
+      db.run(events.result)
+    }
+  }
+
+  def insertZIO(event: Event): ZIO[Any, Throwable, Option[Event]] = {
+    val lowerBound = event.startDateTime
+    val upperBound = event.startDateTime.plusMinutes(event.duration)
+
+    for {
+      existingEvents <- getAllZIO
+      isOverlap = isEventOverlapping(existingEvents, lowerBound, upperBound)
+      result <- if (isOverlap) {
+        ZIO.succeed(None)
+      } else {
+        val insertAction = (events returning events.map(_.id) into ((event, id) => event.copy(id = id))) += event
+        ZIO.fromFuture { implicit ec =>
+          db.run(insertAction.transactionally).map(Some(_))
+        }
+      }
+    } yield result
+  }
+
+  private def isEventOverlapping(existingEvents: Seq[Event], lowerBound: LocalDateTime, upperBound: LocalDateTime): Boolean = {
+    existingEvents.exists { e =>
+      val existingLowerBound = e.startDateTime
+      val existingUpperBound = e.startDateTime.plusMinutes(e.duration)
+      lowerBound.isBefore(existingUpperBound) && upperBound.isAfter(existingLowerBound)
+    }
+  }
 
 
   def delete(id: Long): Future[Option[Int]] = {

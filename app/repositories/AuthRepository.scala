@@ -32,8 +32,6 @@ class AuthRepository @Inject()(val dbConfigProvider: DatabaseConfigProvider)(imp
 
   def getAll: Future[Seq[User]] = db.run(userTable.result)
 
-
-
   class UserTable(tag: Tag) extends Table[User](tag, "users") {
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
     def username = column[String]("username")

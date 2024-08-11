@@ -14,48 +14,38 @@ class ZIOService @Inject() (
                              eventUserService: EventUserService
                            ) {
   def deleteEventChained(eventId: Long): ZIO[Any, Throwable, Unit] = {
-    val zioEffect: ZIO[Any, Throwable, Unit] = for {
+    for {
       //GET EVENT INFO
       event <- eventService.getByIdZIO(eventId)
       event <- event match {
         case Some(e) => ZIO.succeed(e)
-        case None => ZIO.fail(new RuntimeException("Event not found"))
+        case None => ZIO.fail(new RuntimeException("Not found"))
       }
       //DELETE EVENT
       deleteResult <- eventService.deleteZIO(eventId)
       _ <- deleteResult match {
         case Some(_) => ZIO.unit
-        case None => ZIO.fail(new RuntimeException("Event not found"))
+        case None => ZIO.fail(new RuntimeException("Not found chained"))
       }
-      //GET HELPERS
+      //GET LINKER OBJECTS
       userEvents <- eventUserService.getByEventZIO(eventId)
       _ <- userEvents match {
         case seq if seq.nonEmpty => ZIO.unit
-        case _ => ZIO.fail(new RuntimeException("Helper not found"))
+        case _ => ZIO.fail(new RuntimeException("Not found chained"))
       }
-
-      // CANCELLATION MESSAGES
-      messages <- messageService.createCancellationMessagesZIO(event.name, userEvents.toList)
-
-      // MESSAGE CREATION SUCCESS
+      //CREATE CANCELLATION MESSAGES
+      messages <- messageService.createCancellationMessagesZIO(event.name, event.creator, userEvents.toList)
       _ <- messages match {
         case msg if msg.forall(_.isDefined) => ZIO.unit
-        case _ => ZIO.fail(new RuntimeException("Failed to create some cancellation messages"))
+        case _ => ZIO.fail(new RuntimeException("Not found chained"))
       }
-
-      //DELETE HELPER OBJECTS
+      //DELETE LINKER OBJECTS
       deleteUserEventResult <- eventUserService.deleteByEventZIO(eventId)
       _ <- deleteUserEventResult match {
         case Some(_) => ZIO.unit
-        case None => ZIO.fail(new RuntimeException("Failed to delete user events"))
+        case None => ZIO.fail(new RuntimeException("Not found"))
       }
     } yield ()
-    zioEffect.fold(
-      ex => Future.failed(ex), // Convert failure to Future.failed
-      _ => Future.successful(()) // Convert success to Future.successful
-    )
 
   }
-
-
 }

@@ -198,6 +198,19 @@ POST    /api/v1/register           controllers.AuthController.register
 ###
 POST    /api/v2/event/user           controllers.EventUserController.create
 
+
+###
+#   responses:
+#     204:
+#       description: Event with specified id has been deleted
+#     404:
+#       description: Event with specified ID was not found
+#     500:
+#       description: Internal server error
+###
+DELETE  /api/v3/ZIO/events/:id        controllers.EventController.deleteZIO(id: Long)
+
+
 # Map static resources from the /public folder to the /assets URL path
 ### NoDocs ###
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

@@ -1,12 +1,12 @@
 package services
 import models.Event
-import repositories.EventRepository
+import repositories.{EventRepository, EventUserRepository}
 import zio.Task
 
 import java.time.LocalDateTime
 import javax.inject.Inject
 import scala.concurrent.Future
-class EventService @Inject() (eventRepository: EventRepository){
+class EventService @Inject() (eventRepository: EventRepository, helperRepository: EventUserRepository){
 
   def getAll: Future[Seq[Event]] = eventRepository.getAll
 
