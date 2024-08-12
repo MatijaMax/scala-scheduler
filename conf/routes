@@ -198,6 +198,14 @@ POST    /api/v1/register           controllers.AuthController.register
 ###
 POST    /api/v2/event/user           controllers.EventUserController.create
 
+###
+#   responses:
+#     200:
+#       schema:
+#         $ref: '#/definitions/models.EventUser'
+###
+GET     /api/v2/event/user            controllers.EventUserController.getAll
+
 
 ###
 #   responses:
