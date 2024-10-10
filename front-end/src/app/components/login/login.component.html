@@ -1,0 +1,21 @@
+<div class="register-container" style="margin-top: 40px;">
+    <div class="form-div"></div>
+    <form [formGroup]="registerForm">
+    <mat-form-field class="custom-form-field">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="" formControlName="email" class="custom-input">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="custom-form-field">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" class="custom-input">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+    <br>
+    <button mat-flat-button  (click)="LoginUser()" class="register-button">Sign In</button>
+    <br><br>
+    <h1 style="color: red; font-weight: bold;">{{errorDescription}}</h1>
+</form>
+</div>

@@ -14,10 +14,8 @@ class EventReminder @Inject() (
                                 lifecycle: ApplicationLifecycle
                               )(implicit ec: ExecutionContext, runtime: IORuntime) {
 
-  // The stream stars here
   reminderService.runStream.compile.drain.unsafeRunAndForget()
 
-  // Clean up on stop
   lifecycle.addStopHook { () =>
     Future.successful(())
   }

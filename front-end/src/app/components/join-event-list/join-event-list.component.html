@@ -1,0 +1,38 @@
+
+<div fxLayout="row" fxLayoutGap="16px">
+  <mat-form-field class="custom-form-field" appearance="fill">
+    <mat-label>Start Date</mat-label>
+    <input class="custom-input" matInput [matDatepicker]="startPicker" [(ngModel)]="startDate">
+    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="custom-form-field" appearance="fill">
+    <mat-label>End Date</mat-label>
+    <input class="custom-input" matInput [matDatepicker]="endPicker" [(ngModel)]="endDate">
+    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-raised-button class="mat-button-large" color="accent" (click)="filterEvents()">Filter</button>
+  <button mat-raised-button class="mat-button-large" color="accent" (click)="resetFilters()">Reset</button>
+</div>
+<div class="basic-container" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="20px">
+  <div fxLayout="row wrap" fxLayoutAlign="center start">
+    <mat-card *ngFor="let event of viewEvents" class="purple-card">
+      <div fxLayout="column" fxLayoutGap="8px">
+        <div>
+          <p>Title: {{ event.name }}</p>
+        </div>
+        <div>
+          <p>Duration: {{ event.duration }}</p>
+        </div>
+        <div>
+          <p>Date: {{ event.startDateTime | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+        </div>
+        <div>
+          <p>Description: {{ event.description }}</p>
+        </div>
+        <div>
+          <button mat-raised-button color="accent" (click)="joinEvent(event)" class="mat-button-large">Join</button>
+  

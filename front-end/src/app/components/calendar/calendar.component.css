@@ -1,0 +1,23 @@
+
+  
+  :host ::ng-deep .fc-button-primary {
+    background-color: #27a102; 
+    border-color: #1c6000; 
+  }
+
+  :host ::ng-deep .fc-button-primary:hover {
+    background-color: #002f06; 
+    border-color: #1c6000; 
+  }
+
+  :host-context(.app-background) {
+    background-image: none;
+    background-color:#8DB39B;
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+    margin:0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }

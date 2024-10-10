@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+  <span class="custom-favicon">
+    <span class="text-inside">Mini λ Scheduler</span>
+  </span>
+  <div class="spacer"></div>
+
+
+  <a *ngIf="user" mat-button [routerLink]="['/message']" class="mat-button">
+    <img src="assets/notif.png" alt="Simulator Icon" style="width: 34px; height: 30px;" class="icon-lowered">
+  </a>
+
+  <a *ngIf="user" mat-button [routerLink]="['/calendar']" class="mat-button">
+    <img src="assets/calendar.png" alt="Simulator Icon" style="width: 34px; height: 30px;" class="icon-lowered">
+  </a>
+
+  <a *ngIf="user" mat-button [routerLink]="['/event-creation']" class="mat-button"
+  >Create Event</a
+>
+
+<a *ngIf="user" mat-button [routerLink]="['/event-list']" class="mat-button"
+>My Events</a
+>
+
+<a *ngIf="user" mat-button [routerLink]="['/join-event-list']" class="mat-button"
+>Join Events</a
+>
+
+
+
+  <a *ngIf="!user" mat-button [routerLink]="['/register']" class="mat-button">Register</a>
+  <a *ngIf="!user" mat-button [routerLink]="['/login']" class="mat-button-soft">Sign In</a>
+  <a *ngIf="user" mat-button [routerLink]="['/login']" class="mat-button-soft" (click)="logout()">Sign Out</a>
+</mat-toolbar>

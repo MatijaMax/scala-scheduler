@@ -1,0 +1,148 @@
+:host-context(.app-background) {
+  background-image: url('src\assets\scala-gr-two.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 0;
+  margin:0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5vh; 
+  min-height:100vh;
+}
+
+
+.form-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.register-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 1px;
+  background-color: #1c6000!important;
+  font-family: "Rhodium Libre"!important;
+  color: white;
+  font-size: 26px;
+  transition:  transform, 0.3s;
+}
+
+.register-button:hover{
+  transform: translateY(-5px);
+  background-color: white!important;
+  color:#1c6000!important;
+}
+
+.custom-form-field {
+  width: 300px; 
+}
+
+.custom-input {
+  font-size: 16px; 
+}
+
+.purple-card {
+  width: 300px !important; 
+  height: 150px; 
+  background-color: #1c6000;
+  border-radius: 6000; 
+  padding: 12px;
+  padding-top: 1px; 
+  margin: 36px; 
+  font-family: "Rhodium Libre";
+  font-size: 18px;
+  color: white;
+
+}
+
+
+.rotate-icon .mat-icon {
+  transform: rotate(90deg); 
+}
+
+.search-button{
+  background-color: #002f06;
+  font-family: "Rhodium Libre";
+  color:white;
+  font-size: 18px;
+
+  transition:  transform, 0.3s;
+}
+
+.icon-lowered {
+  margin-top: 8px;
+}
+
+.search-button:hover{
+  transform: translateY(-5px);
+  background-color: white!important;
+  color:#800e13ff!important;
+}
+
+.basic-container{
+
+  display: flex;
+  justify-content: center;
+  padding: 0 16px; 
+  box-sizing: border-box;
+  flex-wrap: wrap; 
+}
+
+.mat-button-soft{
+  margin-right: 5px;
+  margin-left: 5px;
+  color: white;
+  font-size: 18px;
+  background-color: #ad2831ff;
+  z-index: 2;
+  font-family: "Rhodium Libre";
+  transition:  transform, 0.3s;
+}
+
+.mat-button-soft:hover{
+  transform: translateY(-15px);
+  background-color: white!important;
+  color:#800e13ff!important;
+}
+
+.mat-button{
+  margin-right: 5px;
+  margin-left: 5px;
+  color: white;
+  font-size: 18px;
+  background-color: #800e13ff;
+  z-index: 2;
+  font-family: "Rhodium Libre";
+  transition:  transform, 0.3s;
+}
+
+.mat-button:hover{
+  transform: translateY(-15px);
+  background-color: white!important;
+  color:#800e13ff!important;
+}
+
+.mat-button-large{
+  transition:  transform, 0.3s;
+  background-color: #002f06!important;
+}
+
+.mat-button-large:hover{
+  transform: translateY(-5px);
+  background-color: white!important;
+  color:#800e13ff!important;
+}
+.search-field{
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-top: 3px;
+}

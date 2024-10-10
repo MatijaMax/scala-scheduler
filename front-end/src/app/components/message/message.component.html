@@ -1,0 +1,20 @@
+<div>
+
+  
+    <div class="basic-container" fxLayout="row wrap" fxLayoutAlign="start">
+      <mat-card *ngFor="let item of items" class="purple-card">
+        <div fxLayout="column" fxLayoutGap="8px">
+
+            <div class="green-x">
+                <img src="assets/notif.png" alt="Simulator Icon" style="width: 24px; height: 20px;" class="icon-lowered">
+              </div>
+          <div>
+            <p> {{ item.content }}</p>
+          </div>
+          <div class="green-x">
+            <button mat-raised-button (click)="readMessage(item)" class="mat-button-large"><img src="assets/green-x.png" alt="Simulator Icon" style="width: 34px; height: 30px;" class="icon-lowered"></button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>

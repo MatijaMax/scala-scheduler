@@ -1,0 +1,48 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 5vh; 
+  min-height:110vh;
+  
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5vh; 
+  min-height:100vh;
+}
+
+.form-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.register-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 1px;
+  background-color: #1c6000!important;
+  font-family: "Rhodium Libre"!important;
+  color: white;
+  font-size: 26px;
+  transition:  transform, 0.3s;
+}
+
+.register-button:hover{
+  transform: translateY(-5px);
+  background-color: white!important;
+  color:#1c6000!important;
+}
+
+.custom-form-field {
+  width: 300px; 
+}
+
+.custom-input {
+  font-size: 16px; 
+}

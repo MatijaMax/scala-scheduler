@@ -1,0 +1,29 @@
+<div class="register-container">
+    <div class="za-cont">
+        <form [formGroup]="registerForm">
+            <mat-form-field class="custom-form-field">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" class="custom-input">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="custom-form-field">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" class="custom-textarea"></textarea>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="custom-form-field">
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="startDateTime" [min]="minDate" class="custom-input">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <br>
+              <mat-form-field class="custom-form-field">
+                <mat-label>Duration</mat-label>
+                <input matInput type="number" formControlName="duration" class="custom-input">
+              </mat-form-field>
+              <br>
+            <button mat-flat-button (click)="CreateEvent()" class="register-button">Create</button>
+        </form>
+    </div>
+</div>
